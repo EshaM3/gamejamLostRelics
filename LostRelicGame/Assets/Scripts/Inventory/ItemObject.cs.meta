@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: d60b7aedf766c47eb912181f2356f1df
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - referenceItem: {instanceID: 0}
+  - InventoryBar: {fileID: 4022232879071565741, guid: 07102c025c2d34feda8f60cc0ca52ca2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
