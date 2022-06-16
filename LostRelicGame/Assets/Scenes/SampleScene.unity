@@ -496,7 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590273403b5591648b0d9db57629657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springGrapple: {fileID: 0}
   speed: 5
   airForce: 2
   jumpForce: 5
@@ -634,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009dc686cb70c74bbc1fc70a077798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420028}
+  MainCamera: {fileID: 519420028}
   length: 0
   origin: 0
   parallax: 0.8
@@ -685,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009dc686cb70c74bbc1fc70a077798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420028}
+  MainCamera: {fileID: 519420028}
   length: 0
   origin: 0
   parallax: 0.5
@@ -951,7 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009dc686cb70c74bbc1fc70a077798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420028}
+  MainCamera: {fileID: 519420028}
   length: 0
   origin: 0
   parallax: 0
@@ -1183,7 +1182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009dc686cb70c74bbc1fc70a077798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420028}
+  MainCamera: {fileID: 519420028}
   length: 0
   origin: 0
   parallax: 0
@@ -1988,7 +1987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009dc686cb70c74bbc1fc70a077798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420028}
+  MainCamera: {fileID: 519420028}
   length: 0
   origin: 0
   parallax: 0.2
@@ -2580,7 +2579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009dc686cb70c74bbc1fc70a077798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420028}
+  MainCamera: {fileID: 519420028}
   length: 0
   origin: 0
   parallax: 0.7

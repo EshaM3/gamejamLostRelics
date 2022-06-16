@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator playerAnimation;
-    public SpringGrapple springGrapple;
+    private SpringGrapple springGrapple;
 
     public float speed = 5.0f;
     public float airForce = 2.0f;
@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        playerAnimation.SetBool("jumping", !isGrounded);
+        playerAnimation.SetBool("swinging", springGrapple.isGrappling);
+
         // Get left/right movement input
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -38,22 +41,25 @@ public class PlayerController : MonoBehaviour
             FlipFacing();
         }
 
-        // Checks for on ground movement
+        // Checks for movement without grappling
         if (!springGrapple.isGrappling)
         {
+            // Horizontal movement on ground
             transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime);
+
+            // Checks for jump input
+            bool jump = Input.GetKey(KeyCode.Space);
+            if (jump && isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, speed);
+            }
         } else
         {
+            // Horizontal movement in air
             rb.AddForce(new Vector2(horizontalInput * airForce, 0));
         }
 
-        // Checks for jump input
-        bool jump = Input.GetKey(KeyCode.Space);
-        if (jump && isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, speed);
-            isGrounded = false;
-        }
+        
 
         // Check if moving
         if (horizontalInput != 0)
@@ -62,15 +68,6 @@ public class PlayerController : MonoBehaviour
         } else {
             playerAnimation.SetBool("moving", false);
         }
-
-        // Check if swinging
-        if (springGrapple.isGrappling)
-        {
-            playerAnimation.SetBool("swinging", true);
-        } else
-        {
-            playerAnimation.SetBool("swinging", false);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -78,6 +75,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
         }
     }
 

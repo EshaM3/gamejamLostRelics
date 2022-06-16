@@ -9,6 +9,8 @@ public class SpringGrapple : MonoBehaviour
     public Camera mainCamera;
     public bool isGrappling;
 
+    private PlayerController playerControls;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,9 @@ public class SpringGrapple : MonoBehaviour
         // Ensure spring is disabled at the start of game.
         playerSpring.enabled = false;
         web.enabled = false;
+
+        // Player controls definition
+        playerControls = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
