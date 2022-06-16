@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator playerAnimation;
-    public WebGrapple webGrp;
+    public SpringGrapple springGrapple;
 
     public float speed = 5.0f;
     public float airForce = 2.0f;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerAnimation = GetComponent<Animator>();
-        webGrp = gameObject.GetComponent<WebGrapple>();
+        springGrapple = gameObject.GetComponent<SpringGrapple>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Checks for on ground movement
-        if (!webGrp.isGrappling)
+        if (!springGrapple.isGrappling)
         {
             transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime);
         } else
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check if swinging
-        if (webGrp.isGrappling)
+        if (springGrapple.isGrappling)
         {
             playerAnimation.SetBool("swinging", true);
         } else
