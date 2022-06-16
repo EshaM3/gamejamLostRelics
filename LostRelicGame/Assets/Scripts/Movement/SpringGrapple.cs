@@ -8,6 +8,7 @@ public class SpringGrapple : MonoBehaviour
     private LineRenderer web;
     public Camera mainCamera;
     public bool isGrappling;
+    public bool canSwing = false;
 
     private PlayerController playerControls;
 
@@ -35,7 +36,7 @@ public class SpringGrapple : MonoBehaviour
         Vector2 mouseCoordinate = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         // Generate a web when mouse is pressed down (one instance)
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
         {
             // Create the spring
             playerSpring.distance = (Vector2.Distance(transform.position, mouseCoordinate)) / 2;
