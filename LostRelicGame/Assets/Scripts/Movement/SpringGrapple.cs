@@ -10,6 +10,7 @@ public class SpringGrapple : MonoBehaviour
     public bool isGrappling;
     public bool canSwing = false;
     public float decreaseRate = 2.5f;
+    public float initialDivider = 1.2f;
 
     private PlayerController playerControls;
 
@@ -40,7 +41,7 @@ public class SpringGrapple : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
         {
             // Create the spring
-            playerSpring.distance = (Vector2.Distance(transform.position, mouseCoordinate)) / 2;
+            playerSpring.distance = (Vector2.Distance(transform.position, mouseCoordinate)) / initialDivider;
             playerSpring.connectedAnchor = mouseCoordinate;
             
             playerSpring.enabled = true;
