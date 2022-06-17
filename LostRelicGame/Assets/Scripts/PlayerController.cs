@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     private bool facingRight = true;
 
+    public float downForce = -1.0f;
+    public float maxHeight = 7;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,12 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.SetBool("jumping", !isGrounded);
         playerAnimation.SetBool("swinging", springGrapple.isGrappling);
+
+        // Prevent player from moving above screen
+        if (transform.position.y > maxHeight)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, downForce);
+        }
 
         // Get left/right movement input
         float horizontalInput = Input.GetAxis("Horizontal");

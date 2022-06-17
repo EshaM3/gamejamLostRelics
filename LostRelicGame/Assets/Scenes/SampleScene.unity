@@ -500,6 +500,8 @@ MonoBehaviour:
   airForce: 2
   jumpForce: 5
   isGrounded: 1
+  downForce: -1
+  maxHeight: 7
 --- !u!114 &69846891
 MonoBehaviour:
   m_ObjectHideFlags: 0
