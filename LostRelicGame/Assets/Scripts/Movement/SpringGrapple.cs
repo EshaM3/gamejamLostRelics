@@ -9,6 +9,7 @@ public class SpringGrapple : MonoBehaviour
     public Camera mainCamera;
     public bool isGrappling;
     public bool canSwing = false;
+    public float decreaseRate = 2.5f;
 
     private PlayerController playerControls;
 
@@ -61,5 +62,8 @@ public class SpringGrapple : MonoBehaviour
             web.SetPosition(0, transform.position);
             web.enabled = true;
         }
+
+        // Shorten the web as time goes on
+        playerSpring.distance -= decreaseRate * Time.deltaTime;
     }
 }
