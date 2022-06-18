@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class PlayerController : MonoBehaviour
     public AudioClip reallyDeepAndDisturbingHumanoidYetNonEuclideanBreathingSound;
     public AudioClip movingSound;
     public AudioClip jumpSound;
+
+    //Health
+    public GameObject[] HealthHearts = new GameObject[6];
+    int numOfHits = 0;
+    //bool isTouchingEnemy = false;
 
 
     // Start is called before the first frame update
@@ -51,7 +57,8 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput > 0.01 && !facingRight)
         {
             FlipFacing();
-        } else if (horizontalInput < 0 && facingRight)
+        }
+        else if (horizontalInput < 0 && facingRight)
         {
             FlipFacing();
         }
@@ -69,28 +76,60 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, speed);
                 SoundManager.instance.PlaySound(jumpSound);
             }
-        } else
+        }
+        else
         {
             // Horizontal movement in air
             rb.AddForce(new Vector2(horizontalInput * airForce, 0));
         }
 
-        
+
 
         // Check if moving
         if (horizontalInput != 0)
         {
             playerAnimation.SetBool("moving", true);
-        } else {
+        }
+        else
+        {
             playerAnimation.SetBool("moving", false);
         }
+
     }
+
+    /*IEnumerator killTime()
+    {
+        HealthHearts[numOfHits].gameObject.SetActive(false);
+        numOfHits++;
+        yield return new WaitForSeconds(1);
+    }
+    */
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+
+        //Need to tag ant as "Enemy"
+        if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6)
+        {
+            HealthHearts[numOfHits].gameObject.SetActive(false);
+            numOfHits++;
+            /*
+            isTouchingEnemy = true;
+            while(isTouchingEnemy == true && numOfHits < 6)
+            {
+                StartCoroutine(killTime());
+            }
+            */
+        }
+
+        //Need to tag any harmful areas like the ditches as "Killbox"
+        if (collision.gameObject.CompareTag("Killbox") || numOfHits >= 6)
+        {
+            SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -100,6 +139,12 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+
+        /*if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6)
+        {
+            isTouchingEnemy = false;
+        }
+        */
     }
 
     //trigger - inventory :)
