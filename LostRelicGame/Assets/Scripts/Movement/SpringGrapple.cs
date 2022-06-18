@@ -13,6 +13,7 @@ public class SpringGrapple : MonoBehaviour
     public float initialDivider = 1.2f;
 
     private PlayerController playerControls;
+    public AudioClip webSound;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,8 @@ public class SpringGrapple : MonoBehaviour
         // Generate a web when mouse is pressed down (one instance)
         if (Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
         {
+            SoundManager.instance.PlaySound(webSound);
+
             // Create the spring
             playerSpring.distance = (Vector2.Distance(transform.position, mouseCoordinate)) / initialDivider;
             playerSpring.connectedAnchor = mouseCoordinate;
