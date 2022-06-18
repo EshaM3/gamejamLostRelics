@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip movingSound;
     public AudioClip jumpSound;
     public AudioClip hitSound;
+    public AudioClip itemPickup;
 
     //Health
     public GameObject[] HealthHearts = new GameObject[6];
@@ -164,6 +165,7 @@ public class PlayerController : MonoBehaviour
             collision.TryGetComponent<ItemObject>(out ItemObject item))
         {
             item.PickupItem();
+            SoundManager.instance.PlaySound(itemPickup);
         }
     }
 
