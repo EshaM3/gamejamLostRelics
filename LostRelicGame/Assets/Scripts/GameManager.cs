@@ -1,33 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 //this script can be used later for spawning enemies & scene changes
 
 public class GameManager : MonoBehaviour
-{
-    
-    public GameObject restart_level; //restart level button revealed by pressing 'esc' key
+{  
+    public GameObject restart_quit_shell; //restart level button and quit button revealed/hidden by pressing 'esc' key
+    //public GameObject inventorySystemShell; //can hide inventory (and show after hidden) by pressing 'i' key
+    //public GameObject SoundManager; //can mute/unmute bg music by pressing 'm' key
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        restart_level.GetComponent<Button>().onClick.AddListener(TaskOnClick);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowRestartQuit();
+        } 
     }
 
-    void TaskOnClick() //for restart when u die / want to restart
+    public void ShowRestartQuit()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        GameObject restart_quit = restart_quit_shell.transform.Find("restart_quit").gameObject;
+        if(restart_quit.activeInHierarchy) restart_quit.SetActive(false);
+        else restart_quit.SetActive(true);
     }
 }

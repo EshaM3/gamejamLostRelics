@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     int numOfHits = 0;
     public float knockBack = 30.0f;
     public float knockUp = 20.0f;
-    //bool isTouchingEnemy = false;
 
     public ParticleSystem dust;
 
@@ -109,14 +108,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    /*IEnumerator killTime()
-    {
-        HealthHearts[numOfHits].gameObject.SetActive(false);
-        numOfHits++;
-        yield return new WaitForSeconds(1);
-    }
-    */
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -136,13 +127,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(knockBackDirection * knockBack, knockUp));
 
             SoundManager.instance.PlaySound(hitSound);
-            /*
-            isTouchingEnemy = true;
-            while(isTouchingEnemy == true && numOfHits < 6)
-            {
-                StartCoroutine(killTime());
-            }
-            */
         }
 
         //Need to tag any harmful areas like the ditches as "Killbox"
@@ -158,12 +142,6 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
-
-        /*if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6)
-        {
-            isTouchingEnemy = false;
-        }
-        */
     }
 
     //trigger - inventory :)
