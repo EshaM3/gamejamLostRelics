@@ -18,6 +18,12 @@ public class PlayerController : MonoBehaviour
     public float downForce = -1.0f;
     public float maxHeight = 7;
 
+    // Audio
+    public AudioClip reallyDeepAndDisturbingHumanoidYetNonEuclideanBreathingSound;
+    public AudioClip movingSound;
+    public AudioClip jumpSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +67,7 @@ public class PlayerController : MonoBehaviour
             if (jump && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, speed);
+                SoundManager.instance.PlaySound(jumpSound);
             }
         } else
         {
