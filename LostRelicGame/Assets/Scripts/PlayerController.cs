@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour
 
     public float downForce = -1.0f;
     public float maxHeight = 7;
+
+    public GameObject[] HealthHearts = new GameObject[6];
+    int numOfHits = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +88,20 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+
+        //Must tag ants as "Enemy" when their prefab is made
+        if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6)
+        {
+            HealthHearts[numOfHits].gameObject.SetActive(false);
+            numOfHits++;
+        }
+
+        //two conditions for death of player
+        //Must tag instant-death areas like ground ditches as "Killbox" when their prefabs are made
+        if (numOfHits >= 6 || collision.gameObject.CompareTag("Killbox"))
+        {
+            SceneManager.LoadScene("GameOver");
         }
     }
 
