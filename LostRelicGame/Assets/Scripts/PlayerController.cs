@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
     public float downForce = -1.0f;
     public float maxHeight = 7;
 
+    //walking limit
+    public float xRangeLeft = -39.0f;
+    public float xRangeRight = 65.0f;
+
     // Audio
     public AudioClip reallyDeepAndDisturbingHumanoidYetNonEuclideanBreathingSound;
     public AudioClip movingSound;
@@ -106,6 +110,11 @@ public class PlayerController : MonoBehaviour
             playerAnimation.SetBool("moving", false);
         }
 
+        //walking x-value limit
+        if (gameObject.transform.position.x < xRangeLeft) gameObject.transform.position =
+                new Vector2(xRangeLeft, gameObject.transform.position.y);
+        if (gameObject.transform.position.x > xRangeRight) gameObject.transform.position =
+                new Vector2(xRangeRight, gameObject.transform.position.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -128,14 +137,13 @@ public class PlayerController : MonoBehaviour
 
             SoundManager.instance.PlaySound(hitSound);
         }
-
-        //Need to tag any harmful areas like the ditches as "Killbox"
-        if (collision.gameObject.CompareTag("Killbox") || numOfHits >= 6)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
     }
 
+    IEnumerator killTime()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("GameOver");
+    }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -152,6 +160,14 @@ public class PlayerController : MonoBehaviour
         {
             item.PickupItem();
             SoundManager.instance.PlaySound(itemPickup);
+        }
+
+        //Need to tag any harmful areas like the ditches as "Killbox"
+        if (collision.gameObject.CompareTag("Killbox") || numOfHits >= 6)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            SoundManager.instance.PlaySound(hitSound);
+            StartCoroutine(killTime());
         }
     }
 
