@@ -23,10 +23,13 @@ public class PlayerController : MonoBehaviour
     public AudioClip reallyDeepAndDisturbingHumanoidYetNonEuclideanBreathingSound;
     public AudioClip movingSound;
     public AudioClip jumpSound;
+    public AudioClip hitSound;
 
     //Health
     public GameObject[] HealthHearts = new GameObject[6];
     int numOfHits = 0;
+    public float knockBack = 30.0f;
+    public float knockUp = 20.0f;
     //bool isTouchingEnemy = false;
 
 
@@ -117,6 +120,13 @@ public class PlayerController : MonoBehaviour
         {
             HealthHearts[numOfHits].gameObject.SetActive(false);
             numOfHits++;
+
+            float knockBackDirection = transform.position.x - collision.gameObject.transform.position.x;
+            knockBackDirection /= Mathf.Abs(knockBackDirection);
+
+            rb.AddForce(new Vector2(knockBackDirection * knockBack, knockUp));
+
+            SoundManager.instance.PlaySound(hitSound);
             /*
             isTouchingEnemy = true;
             while(isTouchingEnemy == true && numOfHits < 6)

@@ -505,6 +505,7 @@ MonoBehaviour:
   reallyDeepAndDisturbingHumanoidYetNonEuclideanBreathingSound: {fileID: 0}
   movingSound: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 6a322717cce45ff4b9d1b5bf5b8468a6, type: 3}
+  hitSound: {fileID: 8300000, guid: 19068460a2bf4794091f8f2d1483e978, type: 3}
   HealthHearts:
   - {fileID: 1192253291}
   - {fileID: 1180590673}
@@ -512,6 +513,8 @@ MonoBehaviour:
   - {fileID: 1445111062}
   - {fileID: 323754934}
   - {fileID: 649445220}
+  knockBack: 25
+  knockUp: 300
 --- !u!114 &69846891
 MonoBehaviour:
   m_ObjectHideFlags: 0
