@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public float knockUp = 20.0f;
     //bool isTouchingEnemy = false;
 
+    public ParticleSystem dust;
+
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
             if (jump && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, speed);
+                CreateDust();
                 SoundManager.instance.PlaySound(jumpSound);
             }
         }
@@ -93,6 +96,11 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput != 0)
         {
             playerAnimation.SetBool("moving", true);
+
+            if (isGrounded)
+            {
+                CreateDust();
+            }
         }
         else
         {
@@ -175,5 +183,10 @@ public class PlayerController : MonoBehaviour
         Vector3 charScale = transform.localScale;
         charScale.x *= -1.0f;
         transform.localScale = charScale;
+    }
+
+    public void CreateDust()
+    {
+        dust.Play();
     }
 }
