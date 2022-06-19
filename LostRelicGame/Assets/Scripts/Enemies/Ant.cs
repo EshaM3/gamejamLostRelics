@@ -62,4 +62,10 @@ public class Ant : MonoBehaviour
         Vector3 direction = Vector3.Normalize(new Vector3(player.transform.position.x - transform.position.x, 0));
         enemyRb.velocity = direction * speed;
     }
+
+    //this doesn't work...
+    public void freeze()
+    {
+        enemyRb.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
 }

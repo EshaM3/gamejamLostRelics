@@ -124,6 +124,15 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
 
+        //this doesn't work....
+        if (collision.gameObject.CompareTag("Enemy") && ButtonEvents.candyForAnt)
+        {
+            if (collision.gameObject.GetComponent<LocationTrigger>().inLocation)
+            {
+                collision.gameObject.GetComponent<Ant>().freeze();
+            }
+        }
+
         //Need to tag ant as "Enemy"
         if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6)
         {

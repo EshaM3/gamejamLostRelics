@@ -27,4 +27,9 @@ public class UIInventoryItemSlot : MonoBehaviour
         m_label.text = item.data.displayName;
         m_stackLabel.text = item.stackSize.ToString();
     }
+
+    public string getLabel()
+    {
+        return m_label.text.ToString();
+    }
 }
