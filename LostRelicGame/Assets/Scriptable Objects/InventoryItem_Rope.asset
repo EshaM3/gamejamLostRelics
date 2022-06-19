@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad30843cca684b9f9d9ee70d384e911, type: 3}
+  m_Name: InventoryItem_Rope
+  m_EditorClassIdentifier: 
+  id: InventoryItem_Rope
+  displayName: Rope
+  icon: {fileID: 21300000, guid: a00d977510c9c32439e7094578a3de40, type: 3}
+  prefab: {fileID: 6708661441714852950, guid: fcb1ad30808bf4b24b8688d84d1d36d0, type: 3}

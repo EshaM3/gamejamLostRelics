@@ -137,6 +137,14 @@ public class PlayerController : MonoBehaviour
 
             SoundManager.instance.PlaySound(hitSound);
         }
+
+        if (collision.gameObject.CompareTag("Enemy") && numOfHits == 6)
+        {
+            numOfHits++;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            SoundManager.instance.PlaySound(hitSound);
+            StartCoroutine(killTime());
+        }
     }
 
     IEnumerator killTime()
@@ -163,7 +171,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Need to tag any harmful areas like the ditches as "Killbox"
-        if (collision.gameObject.CompareTag("Killbox") || numOfHits >= 6)
+        if (collision.gameObject.CompareTag("Killbox"))
         {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             SoundManager.instance.PlaySound(hitSound);
