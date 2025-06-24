@@ -46,6 +46,18 @@ public class Ant : MonoBehaviour
         {
             followPlayer();
         }
+
+        if (ButtonEvents.end)
+        {
+            enemyRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            isMoving = false;
+        }
+
+        // if (ButtonEvents.newScene)
+        // {
+        //     enemyRb.constraints = RigidbodyConstraints2D.None;
+        //     enemyRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        // }
     }
 
     void FlipFacing()
@@ -63,9 +75,19 @@ public class Ant : MonoBehaviour
         enemyRb.velocity = direction * speed;
     }
 
-    //this doesn't work...
     public void freeze()
     {
+        StartCoroutine(freezeTime());
+    }
+
+    IEnumerator freezeTime()
+    {
         enemyRb.constraints = RigidbodyConstraints2D.FreezeAll;
+        isMoving = false;
+        ButtonEvents.candyForAnt = false;
+        yield return new WaitForSeconds(8f);
+        enemyRb.constraints = RigidbodyConstraints2D.None;
+        enemyRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isMoving = true;
     }
 }

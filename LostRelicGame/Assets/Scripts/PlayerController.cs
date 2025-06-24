@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem dust;
 
+    public GameObject antInRange;
+    public bool antIsInRange;
+    public InventoryItemData referenceItem_Candy;
+    public InventoryItemData referenceItem_Rope;
+
 
     // Start is called before the first frame update
     void Start()
@@ -115,6 +120,21 @@ public class PlayerController : MonoBehaviour
                 new Vector2(xRangeLeft, gameObject.transform.position.y);
         if (gameObject.transform.position.x > xRangeRight) gameObject.transform.position =
                 new Vector2(xRangeRight, gameObject.transform.position.y);
+
+        // End of game - freeze spider
+        if (ButtonEvents.end)
+        {
+            InventorySystem.current.Remove(referenceItem_Rope);
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
+        if (antIsInRange && (antInRange != null) && ButtonEvents.candyForAnt)
+        {
+            antInRange.GetComponent<Ant>().freeze();
+            InventorySystem.current.Remove(referenceItem_Candy);
+            ButtonEvents.candyForAnt = false;
+            SoundManager.instance.PlaySound(itemPickup);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -124,17 +144,8 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
 
-        //this doesn't work....
-        if (collision.gameObject.CompareTag("Enemy") && ButtonEvents.candyForAnt)
-        {
-            if (collision.gameObject.GetComponent<LocationTrigger>().inLocation)
-            {
-                collision.gameObject.GetComponent<Ant>().freeze();
-            }
-        }
-
         //Need to tag ant as "Enemy"
-        if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6)
+        if (collision.gameObject.CompareTag("Enemy") && numOfHits < 6 && collision.gameObject.GetComponent<Ant>().isMoving)
         {
             HealthHearts[numOfHits].gameObject.SetActive(false);
             numOfHits++;
@@ -158,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator killTime()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.4f);
         SceneManager.LoadScene("GameOver");
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -185,6 +196,33 @@ public class PlayerController : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             SoundManager.instance.PlaySound(hitSound);
             StartCoroutine(killTime());
+        }
+
+        if (collision.gameObject.CompareTag("OuterCandyZone"))
+        {
+            antInRange = collision.gameObject.transform.parent.gameObject;
+            antIsInRange = true;
+        }
+
+        // //this doesn't work....
+        // if (collision.gameObject.CompareTag("OuterCandyZone") && ButtonEvents.candyForAnt)
+        // {
+        //     Debug.Log("Something did register");
+        //     if (collision.gameObject.transform.parent.gameObject.GetComponent<LocationTrigger>().inLocation)
+        //     {
+        //         collision.gameObject.transform.parent.gameObject.GetComponent<Ant>().freeze();
+        //         ButtonEvents.candyForAnt = false;
+
+        //     }
+        // }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("OuterCandyZone"))
+        {
+            antInRange = null;
+            antIsInRange = false;
         }
     }
 

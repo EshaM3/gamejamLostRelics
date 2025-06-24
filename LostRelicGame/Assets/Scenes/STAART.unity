@@ -379,7 +379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &171285352
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1730,7 +1730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000031471, y: -2.2}
+  m_AnchoredPosition: {x: -0.000030518, y: -15}
   m_SizeDelta: {x: 523.5649, y: 55.0822}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574013194
@@ -1753,9 +1753,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Once you start, you will be navigating a spider who has lost her eggs deep
-    beneath the ground. Help her find them against odds with the many creatures and
-    obstacles that will try to hurt her.
+  m_text: 'Once you start, you will be navigating a spider who has lost her eggs
+    deep beneath the ground. Help her find them against the many creatures and obstacles
+    that will try to hurt her.
+
+
+    Here''s a hint if you need one: The spider can
+    feed candy to the vengeful ants to appease them for as many seconds as the legs
+    she walks on.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e495f69bb9352f4686202a9d9d889be, type: 2}
   m_sharedMaterial: {fileID: -628173999417511052, guid: 5e495f69bb9352f4686202a9d9d889be, type: 2}
@@ -1782,8 +1787,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27
-  m_fontSizeBase: 27
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2296,9 +2301,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- WASD /Arrow keys to move\n- Spacebar to jump\n- Shoot webs by clicking
-    on platforms with your\n   mouse\n- Click on inventory items with your mouse
-    to use\n   them at certain locations\n- Press escape to quit or restart"
+  m_text: "- A/D or Left/Right Arrow keys to move\n- Spacebar to jump\n- Shoot webs
+    by clicking on platforms with your\n   mouse\n- Click on inventory items with
+    your mouse to use\n   them at certain locations\n- Press escape to quit or restart"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e495f69bb9352f4686202a9d9d889be, type: 2}
   m_sharedMaterial: {fileID: -628173999417511052, guid: 5e495f69bb9352f4686202a9d9d889be, type: 2}

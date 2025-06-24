@@ -8,6 +8,7 @@ public class ButtonEvents : MonoBehaviour
 {
     public static bool end = false;
     public static bool candyForAnt = false;
+    public static bool newScene = false;
 
     // Scene to switch to when pressed
     [SerializeField] private string sceneToSwitchTo;
@@ -42,6 +43,7 @@ public class ButtonEvents : MonoBehaviour
 
     void TaskOnClick() //unity action
     {
+        
         ButtonFunction(functionToRun, sceneToSwitchTo);
     }
 
@@ -51,16 +53,24 @@ public class ButtonEvents : MonoBehaviour
         if (functionToRun != null && functionToRun != "")
             Invoke(functionToRun, 0);
         if (sceneToSwitchTo != null && sceneToSwitchTo != "")
+        {
+            end = false;
+            newScene = true;
             SceneManager.LoadScene(sceneToSwitchTo);
+        }
     }
 
     public void RestartLevel()
     {
+        end = false;
+        newScene = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
     {
+        end = false;
+        newScene = true;
         //loads to title screen
         SceneManager.LoadScene(0);
     }
@@ -73,7 +83,6 @@ public class ButtonEvents : MonoBehaviour
                 SceneManager.LoadScene("Level1_Underground");
         }
 
-        //this doesn't work...
         if (gameObject.GetComponentInParent<UIInventoryItemSlot>().getLabel() == "Candy")
         {
             candyForAnt = true;

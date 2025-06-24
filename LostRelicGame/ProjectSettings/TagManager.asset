@@ -9,11 +9,12 @@ TagManager:
   - Item
   - Enemy
   - Killbox
+  - OuterCandyZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Lock
   - Water
   - UI
   - 
